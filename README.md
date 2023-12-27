@@ -1,4 +1,4 @@
-# Vesuvius Scroll Challenge - Inference with Inception 3D and Unet
+# Vesuvius Scroll Challenge - Unet and Inception-3D
 
 This repository contains training and inference code based on an I3D architecture to detect ink from image stacks.
 
