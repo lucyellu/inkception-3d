@@ -18,7 +18,12 @@ cd inkception-3d
 Download the segments that you want to inference or train with. ([paths](http://dl.ash2txt.org/full-scrolls/Scroll1.volpkg/paths/)).   
 Download the eval_segments.zip and training_segments.zip folder for submission segments. 
 
-
+Submission segments include: 
+    20230702185753 
+    20231012184423 (2 passages) 
+    20231005123336 (2 passages)
+    20231031143852 + 20231022170901 (20231022170900_superseded)
+    
 Unzip the downloaded folders and place them in the inkception-3d folder.
 Make sure each {segmentid}_mask.png and {segmentid}_inklabel.png file is in its appropriate segment folder.
 
@@ -62,17 +67,13 @@ Download Youseff's checkpoint [here](https://drive.google.com/file/d/1fAGZbVPHW6
 
 
 ```
-python inference_v4.py --segment_id 335_a --model_path '/content/drive/MyDrive/inkception-3d/models/valid_20230827161847_0_fr_i3depoch=7.ckpt'
+python inference_stride32.py --segment_id 20230702185753 --model_path '/content/drive/MyDrive/inkception-3d/models/valid_20230827161847_0_fr_i3depoch=7.ckpt'
 ```
 
 
 ###
 Some example outputs found at [Segment Browser](https://vesuvius.virtual-void.net/) 
-Submission segments include: 
-    20230702185753 
-    20231012184423 (2 passages) 
-    20231005123336 (2 passages)
-    20231031143852 + 20231022170901 (20231022170900_superseded)
+
 
 
     
