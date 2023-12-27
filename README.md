@@ -6,6 +6,13 @@ This repository contains training and inference code based on an I3D architectur
 ## Instructions
 
 The easiest way is to clone the repo and open the jupyter notebooks in a colab environment. Then simply run the cells of interest. 
+
+```
+git clone https://github.com/lucyellu/inkception-3d.git
+
+```
+
+
 Otherwise- to install and run locally:
 
 
@@ -14,7 +21,11 @@ git clone https://github.com/lucyellu/inkception-3d.git
 cd inkception-3d
 pip install -r requirements.txt
 
+```
+
 #if you run into cudaa or other compatability issues, try installing with no version requirements
+
+```
 pip install -r requirements_noversions.txt
 
 ```
