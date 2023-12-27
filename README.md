@@ -84,6 +84,21 @@ python inference_stride32.py --segment_id 20230702185753 --model_path '/content/
 Some example outputs found at [Segment Browser](https://vesuvius.virtual-void.net/) 
 
 
+###Letter Grid
+
+This tool is meant to assist in letter or character detection.
+
+User can input chracters into each cell which then updates dynamically for each instance of that symbol.
+
+So if you decide that an epsilon should actually be a theta, you can update all instances of that symbol. Click on 'Copy' to print the row or entire grid to output which you can then paste into othe Greek word detector.
+
+Currently the grid is prepopulated with the characters from the first ink/letters section of Scroll 1.
+
+(3) δεικνΥοντΑι ημινοε (4) πι τε πορφΥρ Ας κΑι π (5) των ομ οιων κΑ
+
+
+
+
 
 ### Training
 
@@ -93,6 +108,7 @@ These are the parameters you can adjust per inference or training run.
 ```
 python 64x64_256stride_i3d.py
 ```
+
 
 
 
