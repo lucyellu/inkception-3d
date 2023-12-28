@@ -23,7 +23,7 @@ pip install -r requirements.txt
 
 ```
 
-#if you run into cudaa or other compatability issues, try installing with no version requirements
+#if you run into cudaa or other compatibility issues, try installing with no version requirements
 
 ```
 pip install -r requirements_noversions.txt
@@ -88,7 +88,7 @@ Some example outputs found at [Segment Browser](https://vesuvius.virtual-void.ne
 
 This tool is meant to assist in letter or character detection.
 
-User can input chracters into each cell which then updates dynamically for each instance of that symbol.
+User can input characters into each cell which then updates dynamically for each instance of that symbol.
 So if you decide that an epsilon should actually be a theta, you can update all instances of that symbol. 
 
 Click on 'Copy' to print the row or entire grid to output which you can then paste into othe Greek word detector.
