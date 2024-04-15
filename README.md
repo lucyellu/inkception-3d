@@ -6,7 +6,9 @@ https://github.com/lucyellu/inkception-3d
 
 This repository contains training and inference code based on an I3D architecture to detect ink from image stacks.
 It's based off of GP winning code from Youseff and Luke with slight modifications to inference specific layers. 
-Also credit to Johannes Rudolph's segment browser who pointed out the impact that reversing the order of layers makes. 
+GP winning colab [here](https://colab.research.google.com/drive/11gF1YEAAknr_bTvBKp8eX7GSSjs9WQgN?usp=sharing)
+
+Also credit to Johannes Rudolph's [segment browser](https://vesuvius.virtual-void.net/) who pointed out the impact that reversing the layers makes. 
 I found that stacking the reverse with normal with specific masking can take away some of the distracting artifacts, either from segmentation or inherent non-ink features of papyrus. 
 
 The easiest way to replicate is to clone the repo and open the jupyter notebooks in a colab environment. 
