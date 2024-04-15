@@ -5,8 +5,12 @@ Replication Instructions:
 https://github.com/lucyellu/inkception-3d
 
 This repository contains training and inference code based on an I3D architecture to detect ink from image stacks.
+It's based off of GP winning code from Youseff and Luke with slight modifications to inference specific layers. 
+Also credit to Johannes Rudolph's segment browser who pointed out the impact that reversing the order of layers makes. 
+I found that stacking the reverse with normal with specific masking can take away some of the distracting artifacts, either from segmentation or inherent non-ink features of papyrus. 
 
-The easiest way is to clone the repo and open the jupyter notebooks in a colab environment. Then simply run the cells of interest. 
+The easiest way to replicate is to clone the repo and open the jupyter notebooks in a colab environment. 
+Then simply run the cells of interest. 
 
 ```
 git clone https://github.com/lucyellu/inkception-3d.git
