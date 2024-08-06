@@ -74,10 +74,10 @@ def gkern(kernlen=21, nsig=3):
     return kern2d/kern2d.sum()
 
 class InferenceArgumentParser(Tap):
-    segment_id: str = '20230925002745'
+    segment_id: str = '20231210132040'
     segment_path: str = './eval_segments_shared'
-    model_path: str = '/content/drive/MyDrive/A_Scroll/inkception-3d/models/valid_20230827161847_0_fr_i3depoch=7.ckpt'
-    out_path: str = '/content/drive/MyDrive/A_Scroll/inkception-3d/outputs'
+    model_path: str = './models/valid_20230827161847_0_fr_i3depoch=7.ckpt'
+    out_path: str = './outputs'
     stride: int = 32
     start_idx: int = start_idx
     end_idx: int = end_idx
@@ -85,6 +85,8 @@ class InferenceArgumentParser(Tap):
     batch_size: int = 512
     size: int = 64
     reverse: int = 0
+    epochs: int = 30
+    suffix: str = ''  
 
 args = InferenceArgumentParser().parse_args()
 
@@ -132,7 +134,7 @@ class CFG:
 
     scheduler = 'GradualWarmupSchedulerV2'
     # scheduler = 'CosineAnnealingLR'
-    epochs = 50 # 30
+    epochs = 30 # 30
 
     # adamW warmupあり
     warmup_factor = 10
@@ -667,7 +669,7 @@ def predict_fn(test_loader, model, device, test_xyxys, pred_shape):
             temp_mask_image = Image.fromarray(temp_mask)
 
             # Update progress_filename format to include size and batch size
-            progress_filename = f'{full_dir}/{fragment_id}_{args.start_idx}to{args.end_idx}_normal_stride{args.stride}_size{args.size}_batchsize{args.batch_size}_progress_{progress_percentage}percent.png'
+            progress_filename = f'{full_dir}/{fragment_id}_{args.start_idx}to{args.end_idx}_{args.suffix}_stride{args.stride}_size{args.size}_batchsize{args.batch_size}_progress_{progress_percentage}percent.png'
             temp_mask_image.save(progress_filename)
             print(f"Progress image saved at step {step} ({progress_percentage}%): {progress_filename}")
 
@@ -710,10 +712,10 @@ mask_pred_image = Image.fromarray(mask_pred)
 
 
 # Get the next available filename including size and batch size
-base_filename = f"{fragment_id}_{args.start_idx}to{args.end_idx}_stride{args.stride}"
+base_filename = f"{fragment_id}_{args.start_idx}to{args.end_idx}_{args.suffix}_stride{args.stride}"
 extension = 'png'
+# file_name_with_iteration = get_next_filename(args.out_path, base_filename, extension)
 file_name_with_iteration = get_next_filename(args.out_path, base_filename, args.size, args.batch_size, extension)
-
 # Save image to cloud directory
 cloud_save_path = os.path.join(args.out_path, file_name_with_iteration)
 mask_pred_image.save(cloud_save_path)
