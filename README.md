@@ -1,15 +1,21 @@
-Replication Instructions:
+# inkception-3d: ink detection in carbonized Herculaneum scrolls
 
-# Vesuvius Scroll Challenge - Ink Detection
+Code from about a year on the [Vesuvius Challenge](https://scrollprize.org/): detecting ink in 3D
+X-ray scans of papyrus scrolls carbonized by Vesuvius in 79 AD.
 
-https://github.com/lucyellu/inkception-3d
+**What I found:** reversing the order of the scan layers changes what the model sees (credit to
+Johannes Rudolph's [segment browser](https://vesuvius.virtual-void.net/) for pointing this out).
+Stacking the reversed and normal predictions with targeted masking suppressed distracting
+artifacts, both from segmentation and from non-ink texture in the papyrus.
 
-This repository contains training and inference code based on an I3D architecture to detect ink from image stacks.
-It's based off of GP winning code from Youseff and Luke with slight modifications to inference specific layers. 
-GP winning colab [here](https://colab.research.google.com/drive/11gF1YEAAknr_bTvBKp8eX7GSSjs9WQgN?usp=sharing)
+**Built on:** the 2023 Grand Prize-winning I3D model (Youssef Nader, Luke Farritor and Julian Schilliger)
+([GP colab](https://colab.research.google.com/drive/11gF1YEAAknr_bTvBKp8eX7GSSjs9WQgN?usp=sharing)),
+with modifications to the inference-specific layers.
 
-Also credit to Johannes Rudolph's [segment browser](https://vesuvius.virtual-void.net/) who pointed out the impact that reversing the layers makes. 
-I found that stacking the reverse with normal with specific masking can take away some of the distracting artifacts, either from segmentation or inherent non-ink features of papyrus. 
+![Scroll 1 segments near the end of the scroll](images/scroll1_title.jpg)
+*Scroll 1 segments near the end of the scroll.*
+
+## Replicate
 
 The easiest way to replicate is to clone the repo and open the jupyter notebooks in a colab environment. 
 Then simply run the cells of interest. 
@@ -29,7 +35,7 @@ conda create --name python310 python=3.10
 conda activate python310
 git clone https://github.com/lucyellu/inkception-3d.git
 cd inkception-3d
-pip install -r requirements.txt
+pip install -r install/requirements.txt
 
 
 ```
@@ -43,10 +49,10 @@ albumentations
 warmup_scheduler   
 ```
 
-#if you run into cudaa or other compatibility issues, try installing with no version requirements
+If you run into CUDA or other compatibility issues, try installing with no version requirements
 
 ```
-pip install -r requirements_noversions.txt
+pip install -r install/requirements_noversions.txt
 
 
 ```
@@ -69,25 +75,26 @@ Make sure each {segmentid}_mask.png and {segmentid}_inklabel.png (if training) f
 
 ### Inference
 Place the segment data you want to inference into ./eval_segments or adjust accordingly.
-The inference_stride32 script runs a checkpoint model based on inception-3d. It saves progress images in a folder designated in outputs path at 2% intervals. Adjust as needed. 
+The `inference_v32_suffix.py` script runs a checkpoint model based on inception-3d. It saves progress images in a folder designated in outputs path at 2% intervals. Adjust as needed. 
 
 Arguments found within the InferenceArgumentParser class.
 
 Download Youseff's checkpoint [here](https://drive.google.com/file/d/1fAGZbVPHW6q1hNiI2E2NKzf6TyELzOC4/view?usp=sharing) 
 
 ```
-python inference_stride32.py --segment_id 20230702185753 --model_path '/content/drive/MyDrive/inkception-3d/models/valid_20230827161847_0_fr_i3depoch=7.ckpt'
+python inference_v32_suffix.py --segment_id 20230702185753 --model_path '/content/drive/MyDrive/inkception-3d/models/valid_20230827161847_0_fr_i3depoch=7.ckpt'
 ```
 
-###
+### Example outputs
 Some example outputs found at [Segment Browser](https://vesuvius.virtual-void.net/) 
 
 ### Training
 
-Adjust the CFG class in 64x64_256stride_i3d.py
+Adjust the CFG class in `code/64x64_256stride_i3d.py`.
 These are the parameters you can adjust per inference or training run. 
 
 I found the default backbone setting to be different for the inference (efficientnet0) and training files (set to resnet) so make sure you select the one you want. 
 
 ```
-python 64x64_256stride_i3d.py
+python code/64x64_256stride_i3d.py
+```
